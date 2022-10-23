@@ -1,7 +1,6 @@
 workflows:
   ios-project-debug: # workflow ID
     name: iOS debug # workflow name
-    instance type: mac_mini_m1
     scripts:
      - flutter pub get
      - flutter build ios --debug --no-codesign
