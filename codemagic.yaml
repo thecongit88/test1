@@ -1,21 +1,6 @@
 workflows:
-  ios-project-debug: # workflow ID
-    name: iOS debug # workflow name
-    environment:
-      xcode: latest
-      cocoapods: default
-      vars:
-          XCODE_WORKSPACE: "swiftly.xcworkspace" # <-- Put the name of your workspace here
-          XCODE_SCHEME: "swiftly" # <-- Put the name of your scheme here
-    scripts:       
-      - name: Build debug app
-        script: |
-          xcodebuild build -project "$XCODE_PROJECT" \
-          -scheme "$XCODE_SCHEME" \
-          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO          
-    artifacts:
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-    publishing:
-      email:
-        recipients:
-          - thecongit88@gmail.com
+  sample-workflow:
+  instance type: mac_mini_m1
+  scripts:
+    - flutter pub get
+    - flutter build ios --debug --no-codesign
