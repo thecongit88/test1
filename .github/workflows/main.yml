@@ -13,22 +13,16 @@ jobs:
   build:
     name: Build & Release
     runs-on: macos-latest
-    env:
-      # Unique keychain name so concurrent jobs don't get confused
-      KEYCHAIN: job-${{ github.job }}-${{ github.run_id	}}-${{ github.run_number }}-${{ github.run_attempt }}
+    
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
 
       - name: Install Apple Certificate
         uses: apple-actions/import-codesign-certs@v1
         with:
           p12-file-base64: ${{ secrets.P12_BASE64 }}
           p12-password: ${{ secrets.P12_PASSWORD }}
-      - name: Delete keychain
-        if: always() # Always run this step to ensure the keychain is properly disposed of
-        run: |
-          security delete-keychain "${{ env.KEYCHAIN }}".keychain
 
       - name: Install the provisioning profile
         env:
