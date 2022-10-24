@@ -18,12 +18,6 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v1
 
-      - name: Install Apple Certificate
-        uses: apple-actions/import-codesign-certs@v1
-        with:
-          p12-file-base64: ${{ secrets.P12_BASE64 }}
-          p12-password: ${{ secrets.P12_PASSWORD }}
-
       - name: Install the provisioning profile
         env:
           PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
